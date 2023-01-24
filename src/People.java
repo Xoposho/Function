@@ -36,3 +36,4 @@ public class People {
         return Objects.hash(name, age, helloWorld);
     }
 }
+//by Igor
