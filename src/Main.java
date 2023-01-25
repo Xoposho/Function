@@ -8,10 +8,10 @@ public class Main {
 
     //TASK 5
 
-    public static <Object, String> Function<Object, String> ternaryOperator(
-            Predicate<? super Object> condition,
-            Function<? super Object, ? extends String> ifTrue,
-            Function<? super Object, ? extends String> ifFalse) {
+    public static <T, U> Function<T, U> ternaryOperator(
+            Predicate<? super T> condition,
+            Function<? super T, ? extends U> ifTrue,
+            Function<? super T, ? extends U> ifFalse) {
 
         return t -> condition.test(t) ? ifTrue.apply(t) : ifFalse.apply(t);
     }
@@ -34,17 +34,11 @@ public class Main {
 
         int a = -5;
 
-        Predicate<Integer> pred = new Predicate() {
+        Predicate<Integer> pred = new Predicate<>() {
 
             @Override
-            public boolean test(Object o) {
-                if ((Integer) o >= 0) {
-                    System.out.println("Число положительное (Anon class predicate)");
-                    return true;
-                } else {
-                    System.out.println("Число отрицательное (Anon class predicate)");
-                    return false;
-                }
+            public boolean test(Integer o) {
+                return o >= 0;
 
             }
 
@@ -77,19 +71,12 @@ public class Main {
         System.out.println("-----------------------------------------------------------------------------------");
 
 
-        Consumer<People> cons = new Consumer() {
+        Consumer<People> cons = new Consumer<>() {
 
             @Override
-            public void accept(Object o) {
-                People pep = (People) o;
-                System.out.println(pep.getHelloWorld() + " (Anon class consumer)");
+            public void accept(People o) {
+                System.out.println(o.getHelloWorld() + " (Anon class consumer)");
             }
-
-            @Override
-            public Consumer<People> andThen(Consumer after) {
-                return Consumer.super.andThen(after);
-            }
-
 
         };
 
